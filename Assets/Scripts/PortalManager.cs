@@ -27,7 +27,8 @@ public class PortalManager : MonoBehaviour
 
     void Update()
     {
-        UpdatePortals();
+        Debug.Log(portals[0]);
+        //UpdatePortals();
     }
 
     void UpdatePortals()
@@ -54,28 +55,27 @@ public class PortalManager : MonoBehaviour
 
     void RenderPortal(GameObject inPortal, GameObject outPortal, int iteration)
     {
-        Transform inTransform = inPortal.transform;
-        Transform outTransform = outPortal.transform;
+        //Transform inTransform = inPortal.transform;
+        //Transform outTransform = outPortal.transform;
 
-        Transform cameraTransform = portalCamera.transform;
-        cameraTransform.position = transform.position;
-        cameraTransform.rotation = transform.rotation;
+        //Transform cameraTransform = portalCamera.transform;
+        //cameraTransform.position = transform.position;
+        //cameraTransform.rotation = transform.rotation;
 
-        for (int i = 0; i <= iteration; ++i)
-        {
-            var relativePosition = inTransform.InverseTransformPoint(cameraTransform.position);
-            relativePosition = Quaternion.Euler(0f, 180f, 0f) * relativePosition;
-            cameraTransform.position = outTransform.TransformPoint(relativePosition);
+        
+        //var relativePosition = inTransform.InverseTransformPoint(cameraTransform.position);
+        //relativePosition = Quaternion.Euler(0f, 180f, 0f) * relativePosition;
+        //cameraTransform.position = outTransform.TransformPoint(relativePosition);
 
-            Quaternion relativeRotation = Quaternion.Inverse(inTransform.rotation) * cameraTransform.rotation;
-            relativeRotation = Quaternion.Euler(0f, 180f, 0f) * relativeRotation;
-            cameraTransform.rotation = outTransform.rotation * relativeRotation;
-        }
+        //Quaternion relativeRotation = Quaternion.Inverse(inTransform.rotation) * cameraTransform.rotation;
+        //relativeRotation = Quaternion.Euler(0f, 180f, 0f) * relativeRotation;
+        //cameraTransform.rotation = outTransform.rotation * relativeRotation;
+        
 
-        Plane p = new Plane(-outTransform.forward, outTransform.position);
-        Vector4 clipPlaneWorldSpace = new Vector4(p.normal.x, p.normal.y, p.normal.z, p.distance);
-        Vector4 clipPlaneCameraSpace = Matrix4x4.Transpose(Matrix4x4.Inverse(portalCamera.worldToCameraMatrix)) * clipPlaneWorldSpace;
-        var newMatrix = mainCamera.CalculateObliqueMatrix(clipPlaneCameraSpace);
-        portalCamera.projectionMatrix = newMatrix;
+        //Plane p = new Plane(-outTransform.forward, outTransform.position);
+        //Vector4 clipPlaneWorldSpace = new Vector4(p.normal.x, p.normal.y, p.normal.z, p.distance);
+        //Vector4 clipPlaneCameraSpace = Matrix4x4.Transpose(Matrix4x4.Inverse(portalCamera.worldToCameraMatrix)) * clipPlaneWorldSpace;
+        //var newMatrix = mainCamera.CalculateObliqueMatrix(clipPlaneCameraSpace);
+        //portalCamera.projectionMatrix = newMatrix;
     }
 }
